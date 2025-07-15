@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constance</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff3b2f;
+        }
+        .hidden {
+            display: none;
+        }
+        #heartContainer {
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .heart {
+            width: 80px;
+            height: 80px;
+            background-color: red;
+            position: relative;
+            margin: 40px auto;
+            transform: rotate(45deg);
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 80px;
+            height: 80px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart::before {
+            top: -40px;
+            left: 0;
+        }
+        .heart::after {
+            top: 0;
+            left: -40px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1) rotate(45deg);
+                box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            }
+            50% {
+                transform: scale(1.1) rotate(45deg);
+                box-shadow: 0 0 20px rgba(255, 0, 0, 1);
+            }
+        }
+        #heartContainer.pulsing .heart {
+            animation: pulse 1s infinite;
+        }
+        p {
+            font-size: 1.5em;
+            margin: 20px auto;
+            max-width: 400px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        #heartContainer.pulsing p {
+            animation: textGlow 1s infinite;
+        }
+        @keyframes textGlow {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-5px);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Click to see my feelings for you</h1>
+        <button id="revealButton" aria-label="Reveal my feelings">Reveal</button>
+        <div id="heartContainer" class="hidden">
+            <div class="heart"></div>
+            <p>My feelings for you are the one thing constant in life, 
+                I will forever cherish you, you are my everything, you are the quintessence of my being.
+                <br><br>
+                I love you Constance</p>
+        </div>
+    </div>  
+    <script>
+        const revealButton = document.getElementById('revealButton');
+        const heartContainer = document.getElementById('heartContainer');
+
+        revealButton.addEventListener('click', function() {
+            heartContainer.classList.remove('hidden');
+            heartContainer.classList.add('pulsing');
+            revealButton.classList.add('hidden');
+        });
+
+        // Allow keyboard activation with Enter or Space
+        revealButton.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                revealButton.click();
+            }
+        });
+    </script>
+</body>
+</html>
